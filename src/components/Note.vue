@@ -3,7 +3,7 @@
    <li id="notestitle" class="list-group-item disabled"> Для заметок:</li>
 
     <li><div style="width: 100%" class="input-group">
-    <span class="input-group-text">s : {{status}}</span>
+    <span is="s" class="input-group-text">{{status}}</span>
     <textarea v-model="note" class="form-control" aria-label="With textarea"></textarea>
     <span id="button" @click="req" class="input-group-text">+</span>
   </div></li>
@@ -41,8 +41,11 @@ export default {
         return;
       }
       this.notes.push(this.note);
-      this.status= await dataService.d_req(this.notes,'add',"POST");
-      this.note=  "Текст заметки...";
+      this.note=  "";
+       await dataService.d_req(this.notes,'add',"POST");
+      setTimeout(() => { this.note=  "Текст заметки...";this.status="";
+      } ,1500)
+
     }
 
    }
