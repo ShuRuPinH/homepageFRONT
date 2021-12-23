@@ -1,14 +1,13 @@
 <template>
   <div><ul class="list-group">
-   <li id="notestitle" class="list-group-item disabled"> Для заметок:</li>
+   <li id="notestitle" class="list-group-item disabled">{{status}} </li>
 
     <li><div style="width: 100%" class="input-group">
-    <span is="s" class="input-group-text">{{status}}</span>
+
     <textarea v-model="note" class="form-control" aria-label="With textarea"></textarea>
     <span id="button" @click="req" class="input-group-text">+</span>
   </div></li>
-    <li v-for="(nte) in notes" :key="nte.index">/* {{nte}} */</li> </ul>
-  </div>
+    <li v-for="(nte) in notes" :key="nte.index">/* {{nte}} */</li> </ul></div>
 </template>
 
 <script>
@@ -20,7 +19,7 @@ export default {
     return {
       notes: [],
       note: "Текст заметки...",
-      status: ""
+      status: "Для заметок:"
 
 
     }
@@ -35,15 +34,19 @@ export default {
   },
    methods :{
     async req (){
-      if ( this.notes.includes(this.note)) return;
+      this.note=this.note.trim();
+
+      if ( this.notes.includes(this.note) || this.note.length ==0) return;
       if (this.note.length>120){
         alert("Заметка слишком длинная. Нужно уложиться в 120 символов");
         return;
       }
       this.notes.push(this.note);
       this.note=  "";
-       await dataService.d_req(this.notes,'add',"POST");
-      setTimeout(() => { this.note=  "Текст заметки...";this.status="";
+
+
+      this.status= await dataService.d_req(this.notes,'add',"POST");
+      setTimeout(() => { this.note=  "Текст заметки...";this.status="Для заметок:";
       } ,1500)
 
     }

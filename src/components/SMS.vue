@@ -17,6 +17,8 @@ export default {
   },
    methods:{
     async sms(){
+      this.msg=this.msg.trim();
+
       if (this.msg== "Текст сообщения") return;
       if (this.msg.length>58){
         alert("Сообщение слишком длинное. Нужно уложиться в 58 символов");
@@ -39,7 +41,8 @@ export default {
           head.innerText="Сообщение не отправлено"
         }
        setTimeout(() => {  head.style.backgroundColor = "#67c8a9";
-         head.innerText="Срочная связь:"} ,1500);
+         head.innerText="Срочная связь:";
+         this.msg="Текст сообщения"} ,1500);
      }
   }
 
