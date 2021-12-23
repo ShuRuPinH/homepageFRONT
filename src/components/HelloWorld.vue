@@ -13,7 +13,7 @@
             <li class="list-group-item">And a fifth one</li>
           </ul><br>
         </div>
-        <div class="col-md-4"><SMS></SMS>
+        <div class="col-md-4"><SMS></SMS> <br>
         </div>
         <div class="col-md-4"><Note></Note>
         </div>

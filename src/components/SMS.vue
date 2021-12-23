@@ -13,7 +13,7 @@ import dataService from "../service/axiosService";
 export default {
   name: "SMS",
   data(){return{
-    msg: "Текст сообщения"}
+    msg:"Текст сообщения"}
   },
    methods:{
     async sms(){
@@ -32,7 +32,7 @@ export default {
      status(rez){
           let head =  document.getElementById("smstitle");
 
-        if (rez=="true"){
+        if (rez==true){
          head.style.backgroundColor = "#9be3c2"
           head.innerText="Сообщение успешно отправлено"
         }

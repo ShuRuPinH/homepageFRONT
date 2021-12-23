@@ -26,11 +26,9 @@ export default {
 
 
   },
- async created(){
-        let tmp = await dataService.d_req("",'notes',"GET")  ;
-        if (tmp !=null){
-          this.notes= tmp;
-        }
+  created(){
+   this.init();
+   setInterval(this.init, 4000);
   },
    methods :{
     async req (){
@@ -44,12 +42,19 @@ export default {
       this.notes.push(this.note);
       this.note=  "";
 
-
-      this.status= await dataService.d_req(this.notes,'add',"POST");
+      let temp =await dataService.d_req(this.notes,'add',"POST");
+      this.status= temp ==null? "Ошибка добавления заметки" : temp;
       setTimeout(() => { this.note=  "Текст заметки...";this.status="Для заметок:";
       } ,1500)
 
+    },
+    async init(){
+      let tmp = await dataService.d_req("",'notes',"GET")  ;
+      if (tmp !=null){
+        this.notes= tmp;
+      }
     }
+
 
    }
 
