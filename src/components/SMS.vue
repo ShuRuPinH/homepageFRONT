@@ -25,7 +25,6 @@ export default {
 
      this.status(await dataService.d_req(this.msg,"sms","POST"));
 
-      setTimeout(() => { this.submitForm();} ,300)
     },
 
      status(rez){
